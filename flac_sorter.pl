@@ -6,13 +6,12 @@ use constant SINGLE_FILE_FLAC => 1;
 use constant MULTI_FILE_FLAC => 2;
 
 
-my $dir = "H:/Temp/Unsorted Music/Testing";
+my $dir = "/Users/yewchoonchong/Documents/Projects/git_workspace/flac_sorter/sample";
 my $current_dir = undef;
 my $music_file_count = 0;
 my $accurip_log_found = 0;
 my @files_to_process;
 my @formatted_filenames;
-
 
 sub dir_copy_files_to_results
 {
@@ -40,7 +39,7 @@ sub file_determine_if_flac
 	my $my_file = shift;
 	my ($name, $path, $suffix) = fileparse($my_file, '\.[^\.]*');
 	my $formatted_filename = Lingua::EN::Titlecase->new($name);
-	
+
 	if ($suffix eq ".flac")
 	{
 		push @files_to_process, $my_file;
@@ -90,24 +89,24 @@ sub dir_process_next
 
 	if ($last)
 	{
-		
+
 	}
 	else
 	{
 		print "\n\ncurrent_dir = $current_dir\n";
 	}
-	
+
 }
 
 sub store_foundfiles {
-    next if $_ eq '.' or $_ eq '..';      
-	
+    next if $_ eq '.' or $_ eq '..';
 	if (-d $_)
 	{
 		dir_process_next;
 	}
 	else
 	{
+
 		file_determine_if_flac($_);
 		file_accurip_log_exists($_);
 	}
@@ -126,4 +125,4 @@ dir_process_next(1);
 # filter unwanted files
 
 # rename cue to the correct name
-# 
+#
